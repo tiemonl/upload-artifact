@@ -5859,7 +5859,7 @@ var assert = __webpack_require__(357)
 var path = __webpack_require__(622)
 var fs = __webpack_require__(747)
 var glob = __webpack_require__(120)
-var _0666 = parseInt('666', 8)
+var file_permission = parseInt(inputs.filePermission, 8)
 
 var defaultGlobOpts = {
   nosort: true,
@@ -6020,7 +6020,7 @@ function fixWinEPERM (p, options, er, cb) {
   if (er)
     assert(er instanceof Error)
 
-  options.chmod(p, _0666, function (er2) {
+  options.chmod(p, file_permission, function (er2) {
     if (er2)
       cb(er2.code === "ENOENT" ? null : er)
     else
@@ -6042,7 +6042,7 @@ function fixWinEPERMSync (p, options, er) {
     assert(er instanceof Error)
 
   try {
-    options.chmodSync(p, _0666)
+    options.chmodSync(p, file_permission)
   } catch (er2) {
     if (er2.code === "ENOENT")
       return
@@ -6408,6 +6408,13 @@ function getInputs() {
         if (isNaN(inputs.retentionDays)) {
             core.setFailed('Invalid retention-days');
         }
+    }
+    const permission = core.getInput(constants_1.Inputs.FilePermission);
+    if (permission) {
+      inputs.filePermission = parseInt(permission);
+      if (isNaN(inputs.filePermission)) {
+        inputs.filePermission = parseInt('666')
+      }
     }
     return inputs;
 }
@@ -7335,6 +7342,7 @@ var Inputs;
     Inputs["Path"] = "path";
     Inputs["IfNoFilesFound"] = "if-no-files-found";
     Inputs["RetentionDays"] = "retention-days";
+    Inputs["FilePermission"] = "file-permission"
 })(Inputs = exports.Inputs || (exports.Inputs = {}));
 var NoFileOptions;
 (function (NoFileOptions) {

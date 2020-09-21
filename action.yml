@@ -8,6 +8,8 @@ inputs:
   path:
     description: 'A file, directory or wildcard pattern that describes what to upload'
     required: true
+  file-permission:
+    description: 'File permission value in octal form. i.e: 777'
   if-no-files-found:
     description: >
       The desired behavior if no files are found using the provided path.

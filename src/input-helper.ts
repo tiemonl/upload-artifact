@@ -36,5 +36,8 @@ export function getInputs(): UploadInputs {
     }
   }
 
+  const permission = core.getInput(Inputs.FilePermission)
+  inputs.filePermission = parseInt(permission)
+
   return inputs
 }

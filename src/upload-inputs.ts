@@ -20,4 +20,9 @@ export interface UploadInputs {
    * Duration after which artifact will expire in days
    */
   retentionDays: number
+
+  /**
+   * File permission in octal form
+   */ 
+  filePermission: number
 }
